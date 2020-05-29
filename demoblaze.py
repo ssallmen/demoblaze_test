@@ -25,9 +25,10 @@ class demoblaze:
         self.driver.get(main_page_url)
 
     def open_cart(self):
-        self.driver.get("https://www.demoblaze.com/cart.html")
+        self.driver.get(cart_url)
 
     def filter_phones(self):
+        print("To be implemented")
         pass
 
     def open_product(self, id=None, name=None):
@@ -39,9 +40,10 @@ class demoblaze:
             raise Exception("Give product id or name!")
 
     def find_catalog_product_by_id(self, id):
-        return self.driver.find_element_by_xpath(catalog_product_xpath.format(id=id)) # //a[@class='hrefch' and @href='prod.html?idp_={id}']
+        return self.driver.find_element_by_xpath(catalog_product_xpath.format(id=id))
 
     def find_catalog_product_by_name(self, name):
+        print("To be implemented")
         pass
 
     def add_current_product_to_cart(self):
@@ -54,7 +56,7 @@ class demoblaze:
                 raise AssertionError(f"Right alert message was not shown! (was '{alertMessage}')")
             alert.accept()
         except TimeoutException:
-            print("No popup")
+            print("No alert message")
             raise
         print("Added product to cart")
 
