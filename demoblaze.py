@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import time
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -16,6 +15,8 @@ cart_product_name_xpath = f"{cart_product_xpath}/td[2]"
 product_add_to_cart_btn_xpath = "//div[@id='tbodyid']//a[contains(@class, 'btn-success')]"
 
 class demoblaze:
+    ROBOT_LIBRARY_SCOPE = 'SUITE'
+
     def __init__(self):
         self.driver = webdriver.Chrome()
         self.driver.implicitly_wait(8)
@@ -102,12 +103,18 @@ class demoblaze:
     def close(self):
         self.driver.close()
 
-# db = demoblaze()
-# db.clear_cart()
-# db.open_main_page()
-# db.open_product(id='1')
-# db.add_current_product_to_cart()
-# db.open_cart()
-# db.verify_product_in_cart(count=1)
-# time.sleep(2)
-# db.clear_cart()
+def main():
+    import time
+    db = demoblaze()
+    db.clear_cart()
+    db.open_main_page()
+    db.open_product(id='1')
+    db.add_current_product_to_cart()
+    db.open_cart()
+    db.verify_product_in_cart(count=1)
+    time.sleep(2)
+    db.clear_cart()
+
+
+if __name__ == '__main__':
+    main()
