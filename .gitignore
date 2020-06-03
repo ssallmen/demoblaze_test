@@ -1,5 +1,7 @@
 __pycache__/
 .history
+.vscode
+
 debug.log
 log.html
 output.xml
