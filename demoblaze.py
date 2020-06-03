@@ -17,8 +17,13 @@ product_add_to_cart_btn_xpath = "//div[@id='tbodyid']//a[contains(@class, 'btn-s
 class demoblaze:
     ROBOT_LIBRARY_SCOPE = 'SUITE'
 
-    def __init__(self):
-        self.driver = webdriver.Chrome()
+    def __init__(self, remote=False):
+        if remote:
+            self.driver = webdriver.Remote(
+                command_executor='http://127.0.0.1:4444/wd/hub',
+                desired_capabilities=DesiredCapabilities.CHROME)
+        else:
+            self.driver = webdriver.Chrome()
         self.driver.implicitly_wait(8)
         self.open_main_page()
 
