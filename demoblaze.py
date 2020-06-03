@@ -21,7 +21,7 @@ class demoblaze:
     def __init__(self, remote=False):
         if remote:
             self.driver = webdriver.Remote(
-                command_executor='http://127.0.0.1:4444/wd/hub',
+                command_executor='http://localhost:4444/wd/hub',
                 desired_capabilities=DesiredCapabilities.CHROME)
         else:
             self.driver = webdriver.Chrome()
