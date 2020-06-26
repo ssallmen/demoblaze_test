@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 
+from distutils import util
+
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver import ChromeOptions
 
 main_page_url = "https://www.demoblaze.com"
 cart_url = "https://www.demoblaze.com/cart.html"
@@ -18,15 +21,22 @@ product_add_to_cart_btn_xpath = "//div[@id='tbodyid']//a[contains(@class, 'btn-s
 class demoblaze:
     ROBOT_LIBRARY_SCOPE = 'SUITE'
 
-    def __init__(self, remote=False):
+    def __init__(self, remote=False, headless='False'):
         if remote:
             self.driver = webdriver.Remote(
                 command_executor='http://localhost:4444/wd/hub',
                 desired_capabilities=DesiredCapabilities.CHROME)
         else:
-            self.driver = webdriver.Chrome()
+            chrome_options = ChromeOptions()
+            if bool(util.strtobool(headless)):
+                raise Exception(f"Headless={bool(util.strtobool(headless))}")
+                chrome_options.add_argument('--headless')
+                #chrome_options.add_argument('--no-sandbox')
+                #chrome_options.add_argument('--disable-dev-shm-usage')
+            self.driver = webdriver.Chrome(chrome_options=chrome_options)
         self.driver.implicitly_wait(8)
         self.open_main_page()
+        self.driver.save_screenshot("open.png")
 
     def open_main_page(self):
         self.driver.get(main_page_url)

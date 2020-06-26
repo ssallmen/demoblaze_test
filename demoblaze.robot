@@ -1,5 +1,5 @@
 *** Settings ***
-Library    demoblaze  WITH NAME  db
+Suite Setup    Setup
 
 *** Keywords ***
 Add Product To Cart
@@ -7,6 +7,11 @@ Add Product To Cart
     db.Open Main Page
     db.Open Product  id=${id}
     db.Add Current Product To Cart
+
+Setup
+    ${exists}=    Run Keyword And Return Status    Variable Should Exist    \${headless}
+    Run Keyword If    ${exists}    Import Library    demoblaze    headless=${headless}    WITH NAME    db
+    ...    ELSE    Import Library    demoblaze    WITH NAME    db
 
 *** Test Cases ***
 Add one product to cart
