@@ -29,7 +29,6 @@ class demoblaze:
         else:
             chrome_options = ChromeOptions()
             if bool(util.strtobool(headless)):
-                raise Exception(f"Headless={bool(util.strtobool(headless))}")
                 chrome_options.add_argument('--headless')
                 #chrome_options.add_argument('--no-sandbox')
                 #chrome_options.add_argument('--disable-dev-shm-usage')
