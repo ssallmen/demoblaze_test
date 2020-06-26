@@ -30,7 +30,7 @@ class demoblaze:
             chrome_options = ChromeOptions()
             if bool(util.strtobool(headless)):
                 chrome_options.add_argument('--headless')
-                #chrome_options.add_argument('--no-sandbox')
+                chrome_options.add_argument('--no-sandbox')
                 #chrome_options.add_argument('--disable-dev-shm-usage')
             self.driver = webdriver.Chrome(chrome_options=chrome_options)
         self.driver.implicitly_wait(8)
